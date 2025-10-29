@@ -1,6 +1,16 @@
-# Stream YOLOv11 Pipeline
+# Table of Contents
 
-A real-time object detection pipeline using custom model trained on YOLOv11 (`11l` model) implemented with OpenCV and Ultralytics.
+1. [Project Description](#project-description)
+2. [Installation and Setup](#installation-and-setup)
+3. [API Guideline](#api-guideline)
+
+---
+
+# 1. Project Description
+
+## Stream YOLOv11 Pipeline
+
+A real-time object detection pipeline with RTSP using a custom model trained on YOLOv11 (`11l` model), implemented with OpenCV and Ultralytics.
 
 ---
 
@@ -10,63 +20,104 @@ A real-time object detection pipeline using custom model trained on YOLOv11 (`11
 - `opencv-python` (cv2)
 - `math`
 - `time`
+- `Flask`
 - `python-dotenv`
 
-### OOP pipelines will include the following method
-- `__init__(model_path=None)`
-	-	Loads custom model/
-- `capture_video`
-  - start the camera
-- `preprocess`
-  - width is 640 and height is 480.
-- `postprocess_result`
-  - returns class names, confidence and coordinate points.
-- `test`
-  - test the pipeline for 10 seconds (default value) which can be passed manually.
-- `run`
-  - model will run continuously.
+### OOP Pipeline Methods
 
-### Tested model files' sizes
-- best (2).pt 51.2MB
+- `__init__(model_path=None)`: Loads custom model
+- `capture_video`: Stream RTSP
+- `preprocess`: Width is 640 and height is 480
+- `postprocess_result`: Returns class names, confidence, and coordinate points
+- `test`: Test the pipeline for 10 seconds (default value, can be set manually)
+- `run`: Model will run continuously
 
-### Model result example
+### Tested Model File Size
 
-        0: 480x640 1 customer, 1 phone, 419.0ms
-        Speed: 0.7ms preprocess, 419.0ms inference, 0.8ms postprocess per image at shape (1, 3, 480, 640)
+- `best (2).pt` — 51.2MB
 
-            confidence: 0.96
-            classname: customer
-            x1: 44
-            x2: 601
-            y1: 6
-            y2: 479
+### Model Result Example
 
-            confidence: 0.82
-            classname: phone
-            x1: 299
-            x2: 451
-            y1: 0
-            y2: 305
+```
+0: 480x640 1 customer, 1 phone, 419.0ms
+Speed: 0.7ms preprocess, 419.0ms inference, 0.8ms postprocess per image at shape (1, 3, 480, 640)
 
-# Running the project
+    confidence: 0.96
+    classname: customer
+    x1: 44
+    x2: 601
+    y1: 6
+    y2: 479
+
+    confidence: 0.82
+    classname: phone
+    x1: 299
+    x2: 451
+    y1: 0
+    y2: 305
+```
+
+---
+
+# 2. Installation and Setup
+
+## Running the Project
+
 ```bash
-git clone github-link / Download this zip
+git clone <github-link> # or download this zip
 cd erke
 ```
-### Create and activate a virtual environment
+
+### Create and Activate a Virtual Environment
+
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
-### Install dependencies:
+
+### Install Dependencies
+
 ```bash
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
-### Prepare your .env file with required configuration
-### Run the pipeline
+### Prepare your `.env` file with required configuration
+
+### Run the Pipeline
+
 ```bash
 python main.py
 ```
-> [!WARNING]
-> Currently model.test() method is implemented for testing purpose. 
+
+---
+
+# 3. API Guideline
+
+There are two POST methods: `start_prediction` and `stop_prediction`.
+
+## API Endpoints
+
+### 1. `start_prediction`
+
+- **Base URL:** `http://127.0.0.1:8000/`
+- **Endpoint:** `/start_prediction`
+- **Method:** `POST`
+- **Content-Type:** `application/json`
+- **Key:** `timestamps`
+- **Response:**
+  - Prediction started
+
+### 2. `stop_prediction`
+
+- **Base URL:** `http://127.0.0.1:8000/`
+- **Endpoint:** `/stop_prediction`
+- **Method:** `POST`
+- **Content-Type:** `application/json`
+- **Key:** `timestamps`
+- **Response:**
+  - Prediction stopped
+
+_Note: The logic to sum up the prediction and get an abstracted answer is still under consideration._
+
+> [!NOTE]
+> The timestamps key can be any string or text value.
