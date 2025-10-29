@@ -121,17 +121,26 @@ There are two POST methods: `start_prediction` and `stop_prediction`.
 _Note: The logic to sum up the prediction and get an abstracted answer is still under consideration._
 
 CURL setup
-Command Prompt
-curl -X POST http://127.0.0.1:8000/start_prediction -H "Content-Type: application/json" -d "{\"start_timestamps\": \"2025-10-28T22:00:00\"}"
-curl -X POST http://127.0.0.1:8000/stop_prediction -H "Content-Type: application/json" -d "{\"start_timestamps\": \"2025-10-28T22:00:00\"}"
 
-Window Powershell
+### Command Prompt
+```bash
+curl -X POST http://127.0.0.1:8000/start_prediction -H "Content-Type: application/json" -d "{\"start_timestamps\": \"2025-10-28T22:00:00\"}"
+```
+```bash
+curl -X POST http://127.0.0.1:8000/stop_prediction -H "Content-Type: application/json" -d "{\"start_timestamps\": \"2025-10-28T22:00:00\"}"
+```
+
+### Window Powershell
+```bash
 curl -X POST http://127.0.0.1:8000/start_prediction `
      -H "Content-Type: application/json" `
      -d '{"start_timestamps": "2025-10-28T22:00:00"}'
+```
+```bash
 curl -X POST http://127.0.0.1:8000/start_prediction `
      -H "Content-Type: application/json" `
-     -d '{"start_timestamps": "2025-10-28T22:00:00"}'
+     -d '{"start_timestamps": "2025-10-28T22:00:00"} '
+```
      
 > [!NOTE]
 > The timestamps key can be any string or text value.
