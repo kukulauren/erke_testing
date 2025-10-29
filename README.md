@@ -82,6 +82,7 @@ pip install -r requirements.txt
 ```
 
 ### Prepare your `.env` file with required configuration
+Add RTSP path in the .env file.
 
 ### Run the Pipeline
 
